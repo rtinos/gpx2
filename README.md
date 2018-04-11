@@ -8,9 +8,13 @@ Reference:  R. Tinos, D. Whitley, and G. Ochoa (2017). A new generalized partiti
 Contact: Renato Tinos <rtinos@ffclrp.usp.br>
 
 Running the code: ./gpx2 <name_of_instance.tsp>
+
 Example for running the code with instance xqe3891: 
+
 				make
+				
 			     ./gpx2 xqe3891.tsp 
+			     
 Input: i) TSP instance (e.g., xqe3891.tsp); 
 
 Observation: 3 fusion steps are performed (see gpx.cpp). The number of fusion steps can be changed by adding/removing the number of calls for function 
