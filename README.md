@@ -1,5 +1,5 @@
 # gpx2
-Generalized Partition Crossover 2 (GPX2)
+This repository contains the code for Generalized Partition Crossover 2 (GPX2). An example of how to recombine two random TSP solutions is presented in the main file.
 
 
 Description: This code is used to recombine, using GPX2, 2 solutions for the Traveling Salesman Problem. 
