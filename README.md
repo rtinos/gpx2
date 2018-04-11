@@ -17,6 +17,7 @@ Observation: 3 fusion steps are performed (see gpx.cpp). The number of fusion st
 			candidate->fusion(...)
 
 Function gpx: recombine two solutions using GPX2
+	
 	- Call: fitness_offspring=gpx(parent1,parent2,offspring); 
 	
 	// where parent1, parent 2, offspring are solution vectors (integer vectors) and fitness_offspring is the fitness of the offspring
