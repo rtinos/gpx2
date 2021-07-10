@@ -4,7 +4,7 @@ This repository contains the code for Generalized Partition Crossover 2 (GPX2). 
 
 Description: This code is used to recombine, using GPX2, 2 solutions for the Traveling Salesman Problem. 
 
-Reference:  R. Tinos, D. Whitley, and G. Ochoa (2017). A new generalized partition crossover for the traveling salesman problem: tunneling between local optima. arXiv.org		
+Reference:  R. Tinos, D. Whitley, and G. Ochoa (2020). A new generalized partition crossover for the traveling salesman problem: tunneling between local optima. Evolutionary Computation (2020) 28 (2): 255–288.		
 Contact: Renato Tinos <rtinos@ffclrp.usp.br>
 
 Running the code: ./gpx2 <name_of_instance.tsp>
