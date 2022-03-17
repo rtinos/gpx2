@@ -804,10 +804,6 @@ void gpx(int **solution_blue, int **solution_red, double *fitness_offspring_blue
 		candidate->testComp(i); // test component i
 	}
 
-	#ifdef REPORT
-	candidate->report();
-	#endif
-
 	// Step 6.b: test unfeasible components using simplified external graphs
 	candidate->testUnfeasibleComp(solution_blue_p2);
 

@@ -28,7 +28,7 @@ void read_problem(char* filename){
 		if(!strcmp(keywords, "DIMENSION")){
   			if(!sscanf(strtok(NULL, Delimiters), "%d", &n_cities)){
 				cout<<"DIMENSION error"<<endl;
-				exit(0);
+				exit(EXIT_FAILURE);
   			}
 			coord_x=aloc_vectord (n_cities);
 			coord_y=aloc_vectord (n_cities);
@@ -36,11 +36,11 @@ void read_problem(char* filename){
 		else if(!strcmp(keywords, "EDGE_WEIGHT_TYPE")){
   			if(!(tempChar=strtok(NULL, Delimiters))){
 				cout<<"EDGE_WEIGHT_TYPE error"<<endl;
-				exit(0);
+				exit(EXIT_FAILURE);
   			}
 			 if(strcmp(tempChar, "EUC_2D")){
 				cout<<"not EUC_2D"<<endl;
-				exit(0);
+				exit(EXIT_FAILURE);
 			 }
 		}
 		else if(!strcmp(keywords, "NODE_COORD_SECTION")){
@@ -49,7 +49,6 @@ void read_problem(char* filename){
 					//coordinates
 					fin>>id;
 					fin>>coord_x[i]>>coord_y[i];
-
   				}
     		}
 		}
@@ -71,5 +70,5 @@ void read_problem(char* filename){
 		   }
 	}
 
-
+	srand (time(NULL));
 }

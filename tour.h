@@ -38,10 +38,11 @@ public:
 	int n_components;
 	int n_feasible;
 	int n_infeasible;
+	int n_fusions;
     candidates(int *vector_comp, int n_new);
     ~candidates(void);
 	void findInputs(int *sol_blue, int *sol_red);
-	void testComp(int cand);
+	void testComp(int cand, bool fusion);
 	int testUnfeasibleComp(int *sol_blue);
 	void fusion(int *sol_blue, int *sol_red);
 	void fusionB(int *sol_blue, int *sol_red);
@@ -83,6 +84,7 @@ candidates::candidates(int *vector_comp, int n_new ){
 	this->n_components = 0;
 	this->n_feasible = 0;
 	this->n_infeasible = 0;
+	this->n_fusions = 0;
 }
 
 
@@ -117,19 +119,19 @@ void candidates::testSol(int *sol, int n_sol){
 		testsol[i]=0;
 	for (i=0;i<n_sol;i++){
 		if (sol[i]<0 || sol[i]>=n_sol){
-			cout<<"PROBLEM IN SOLUTION! ELEMENT SOL["<<i<<"] OUT OF RANGE (="<<sol[i]<<") "<<endl;
-			exit(0);
+			cerr << "PROBLEM IN SOLUTION! ELEMENT SOL[" << i << "] OUT OF RANGE (=" << sol[i] <<") "<< endl;
+			exit(EXIT_FAILURE);
 		}
 		testsol[sol[i]]=testsol[sol[i]]+1;
 	}
 	for (i=0;i<n_sol;i++){
 		if (testsol[i]==0){
-			cout<<"PROBLEM IN SOLUTION! ELEMENT "<<i<<" DOES NOT APPEAR "<<endl;
-			exit(0);
+			cerr << "PROBLEM IN SOLUTION! ELEMENT " << i << " DOES NOT APPEAR " << endl;
+			exit(EXIT_FAILURE);
 		}
 		else if (testsol[i]>1){
-			cout<<"PROBLEM IN SOLUTION! ELEMENT "<<i<<" APPEARS MORE THAN ONE TIME "<<endl;
-			exit(0);
+			cerr << "PROBLEM IN SOLUTION! ELEMENT " << i << " APPEARS MORE THAN ONE TIME " << endl;
+			exit(EXIT_FAILURE);
 		}
 	}
 
@@ -324,7 +326,7 @@ int candidates::isequal(Grafo *G1 , Grafo *G2){
 
 
 // test candidate component cand
-void candidates::testComp(int cand)
+void candidates::testComp(int cand, bool fusion=false)
 {
 	int i, *inp_out_blue_inv, *inp_out_red;
 
@@ -337,7 +339,7 @@ void candidates::testComp(int cand)
 		this->n_components++;
 		this->n_feasible++;
 	} else {
-		this->n_components++;
+		this->n_components += !fusion;
 		// Graphs for blue and red tours
 		inp_out_blue_inv = new int[n];
 		inp_out_red = new int[2*n_inputs[cand]];
@@ -405,10 +407,11 @@ void candidates::testComp(int cand)
 		// Comparing the two graphs
 		if (isequal(Gs_blue,Gs_red)) {
 			test[cand]=1;
-			this->n_feasible++;
+			this->n_feasible += !fusion;
+			this->n_fusions += fusion;
 		} else {
 			test[cand]=0;
-			this->n_infeasible++;
+			this->n_infeasible += !fusion;
 		}
 
 		delete Gs_red;
@@ -552,7 +555,7 @@ void candidates::fusion(int *sol_blue, int *sol_red){
 		// Repeating Step 6: testing the candidate components
 		for (cand=0;cand<n_cand;cand++)
 			if (neigh_vec_cond[ cand ]==2)
-				testComp(cand); // test component cand
+				testComp(cand, true); // test component cand
 
 	}
 
@@ -722,7 +725,7 @@ void candidates::fusionB(int *sol_blue, int *sol_red){
 			// this procedure is O(n)
 			for (cand=0;cand<n_cand;cand++)
 				if (new_component[ cand ]==1)
-					testComp(cand); // test component cand
+					testComp(cand, true); // test component cand
 
 
 			// Testing unfeasible partitions
@@ -935,13 +938,14 @@ void candidates::print(void){
 
 void candidates::report(void)
 {
-	int i;
-
-	for (i = 0; i < n_cand; ++i)
-		cout << "test[" << i << "]: " << test[i] << endl;
+	// for (int i = 0; i < n_cand; ++i)
+	// 	cout << "test[" << i << "]: " << test[i] << endl;
 
 	cout << "GPX2: ";
-	cout << n_cand << ", " << this->n_components << ", (" << this->n_infeasible << ", " << this->n_feasible << ")" << endl;
+	cout << this->n_components << ", ("
+	     << this->n_infeasible << ", "
+		 << this->n_feasible << ", "
+		 << this->n_fusions << "), ";
 }
 
 // return test of the candidate

@@ -36,7 +36,6 @@ void rand_init(int *p1, int *p2){
 		v_in[gene]=gene;
 	}
 
-	srand (time(NULL));
 	rand_perm(v_in, p1, n_cities);		// random permutation of v_in
 	rand_perm(v_in, p2, n_cities);		// random permutation of v_in
 
@@ -54,8 +53,8 @@ int main(int argc , char *argv[])
 
 	// Arguments
 	if( argc < 2) {
-		cout<<"Insufficient number of arguments!"<<endl;
-		exit(1);
+		cerr << "Insufficient number of arguments!" << endl;
+		exit(EXIT_FAILURE);
 	}
 	else{
 		prob_name=argv[1];
@@ -64,7 +63,6 @@ int main(int argc , char *argv[])
 	// TSP
 	read_problem(prob_name);
 
-
 	cout << "\n ***** Example: recombination of 2 random individuals ****" << endl;
 
 	p1=aloc_vectori(n_cities);
@@ -72,8 +70,8 @@ int main(int argc , char *argv[])
 	rand_init(p1, p2);		// random initialization of the parents
 
 	// Recombination by GPX2
+	cout << "GPX2: Components, (Infeasible, Feasible, Fusions), Best offspring, Worst offspring\n";
 	gpx(&p1, &p2, &off_1_fitness, &off_2_fitness);
-	cout << "Offspring 1 cost, Offspring 2 cost" << endl;
 	cout << (long long) off_1_fitness << ", " << (long long) off_2_fitness << endl;
 
 	if (n_cities<=max_dm_size)

@@ -12,14 +12,14 @@
 int **aloc_matrixi(int lines , int collums)
 {
 	int i, **Matrix;
-	
+
 	Matrix = new int*[lines];
 	for (i=0;i<lines;i++) {
 		Matrix[i] = new int[collums];
 	}
 	if (!Matrix) {
-		cout<<"Allocation Error!"<<endl;
-		exit(1);
+		cerr << "Allocation Error!" << endl;
+		exit(EXIT_FAILURE);
 	}
 
 	return Matrix;
@@ -35,8 +35,8 @@ int *aloc_vectori(int lines)
 
 	vector = new int[lines];
 	if (!vector) {
-		cout<<"Allocation Error!"<<endl;
-		exit(1);
+		cerr << "Allocation Error!" << endl;
+		exit(EXIT_FAILURE);
 	}
 	return vector;
 }
@@ -98,5 +98,3 @@ void rand_perm(int *inp, int *out, int size)
 	}
 
 }
-
-
