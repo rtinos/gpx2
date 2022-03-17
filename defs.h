@@ -2,7 +2,10 @@
 *								 Definitions							 *
 \******************************************************************************/
 #include <iostream>
-using namespace std; 
+using namespace std;
+
+const int max_dm_size = 15000;
+enum { WORST, BEST };
 
 /* Global variables */
 extern double *coord_x, *coord_y;				// coordinates of the cities
@@ -11,7 +14,7 @@ extern int n_cities;							// number of cities
 extern char *prob_name;							// name of the file for the weight matrix
 
 /* Function declaration */
-double gpx(int *solution_blue, int *solution_red, int *offspring );
+void gpx(int **solution_blue, int **solution_red, double *fitness_offspring_blue, double *fitness_offspring_red);
 int *aloc_vectori(int lines);
 double *aloc_vectord(int lines);
 int **aloc_matrixi(int lines , int collums);
