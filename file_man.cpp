@@ -20,12 +20,12 @@
 void read_problem(char* filename){
 	int i, j, id;
 	char line[CHAR_LEN], * keywords,Delimiters[] = " :=\n\t\r\f\v", * tempChar;
-	
+
   ifstream fin(filename);
   while((fin.getline(line, CHAR_LEN-1))){
 		if(!(keywords = strtok(line, Delimiters)))
   			continue;
-		if(!strcmp(keywords, "DIMENSION")){			
+		if(!strcmp(keywords, "DIMENSION")){
   			if(!sscanf(strtok(NULL, Delimiters), "%d", &n_cities)){
 				cout<<"DIMENSION error"<<endl;
 				exit(0);
@@ -47,7 +47,7 @@ void read_problem(char* filename){
   			if(n_cities!=0){
   				for(i=0; i<n_cities; i++){
 					//coordinates
-					fin>>id;       
+					fin>>id;
 					fin>>coord_x[i]>>coord_y[i];
 
   				}
@@ -57,7 +57,7 @@ void read_problem(char* filename){
   fin.close();
 
   // building the weight matrix
-	 if (n_cities<=15000){
+	 if (n_cities<=max_dm_size){
 		  W = aloc_matrixi(n_cities,n_cities);
 		  for(i=0; i<n_cities; i++){
 				for(j=i; j<n_cities; j++){
@@ -65,13 +65,11 @@ void read_problem(char* filename){
 							W[i][j]=0;
 						else {
 							W[i][j]=round( sqrt( pow(coord_x[i]-coord_x[j],2) +pow(coord_y[i]-coord_y[j],2) ) );		// compute the distance between the cities i and j
-							W[j][i]=W[i][j];            
+							W[j][i]=W[i][j];
 						}
 				}
 		   }
 	}
 
-	
+
 }
-
-
