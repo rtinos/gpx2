@@ -429,7 +429,7 @@ int candidates::testUnfeasibleComp(int *sol_blue){
 	int i, j, aux, *comp_seq, *inp_comp_seq, n_newpart=0;
 
 	comp_seq=aloc_vectori(n);			// sequence of all entries in unfeasible components in the order given by sol_blue
-	inp_comp_seq=aloc_vectori(n_cand);		// records the number of entries in each component in comp_seq
+	inp_comp_seq=aloc_vectori0(n_cand);		// records the number of entries in each component in comp_seq
 
 	// creating comp_seq
 	j=0;									// j is the effective size of comp_seq

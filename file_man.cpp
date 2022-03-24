@@ -12,8 +12,6 @@
 
 #define CHAR_LEN 100
 
-
-
 /****************************************************************/
 /* Read the problem instance (adapted from DTSP generator - Yang et al.) */
 /****************************************************************/
@@ -27,7 +25,7 @@ void read_problem(char* filename){
   			continue;
 		if(!strcmp(keywords, "DIMENSION")){
   			if(!sscanf(strtok(NULL, Delimiters), "%d", &n_cities)){
-				cout<<"DIMENSION error"<<endl;
+				cerr << "DIMENSION error" << endl;
 				exit(EXIT_FAILURE);
   			}
 			coord_x=aloc_vectord (n_cities);
@@ -35,11 +33,11 @@ void read_problem(char* filename){
 		}
 		else if(!strcmp(keywords, "EDGE_WEIGHT_TYPE")){
   			if(!(tempChar=strtok(NULL, Delimiters))){
-				cout<<"EDGE_WEIGHT_TYPE error"<<endl;
+				cerr << "EDGE_WEIGHT_TYPE error" << endl;
 				exit(EXIT_FAILURE);
   			}
 			 if(strcmp(tempChar, "EUC_2D")){
-				cout<<"not EUC_2D"<<endl;
+				cerr << "not EUC_2D" << endl;
 				exit(EXIT_FAILURE);
 			 }
 		}
@@ -56,7 +54,7 @@ void read_problem(char* filename){
   fin.close();
 
   // building the weight matrix
-	 if (n_cities<=max_dm_size){
+	 if (n_cities <= max_dm_size) {
 		  W = aloc_matrixi(n_cities,n_cities);
 		  for(i=0; i<n_cities; i++){
 				for(j=i; j<n_cities; j++){
@@ -68,6 +66,8 @@ void read_problem(char* filename){
 						}
 				}
 		   }
+	} else {
+		W = NULL;
 	}
 
 	srand (time(NULL));

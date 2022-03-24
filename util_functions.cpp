@@ -41,6 +41,19 @@ int *aloc_vectori(int lines)
 	return vector;
 }
 
+// Initialized to 0
+int *aloc_vectori0(int lines)
+{
+	int *vector;
+
+	vector = new int[lines]();
+	if (!vector) {
+		cerr << "Allocation Error!" << endl;
+		exit(EXIT_FAILURE);
+	}
+	return vector;
+}
+
 
 /******************************************************************************\
 *								Dynamic Allocation: Vector of Doubles						 *

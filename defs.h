@@ -16,6 +16,7 @@ extern char *prob_name;							// name of the file for the weight matrix
 /* Function declaration */
 void gpx(int **solution_blue, int **solution_red, double *fitness_offspring_blue, double *fitness_offspring_red);
 int *aloc_vectori(int lines);
+int *aloc_vectori0(int lines);
 double *aloc_vectord(int lines);
 int **aloc_matrixi(int lines , int collums);
 void desaloc_matrixi(int **Matrix , int lines);
