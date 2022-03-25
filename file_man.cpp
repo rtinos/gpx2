@@ -71,4 +71,6 @@ void read_problem(char* filename){
 	}
 
 	srand (time(NULL));
+
+	cout << "GPX2: Components, (Infeasible, Feasible, Fusions), Best offspring, Worst offspring, Time\n";
 }
